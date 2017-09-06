@@ -4,6 +4,7 @@ __pycache__/
 
 # C extensions
 *.so
+score/uws/_hub/hub.cpp
 
 # Distribution / packaging
 .Python
