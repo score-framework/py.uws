@@ -25,6 +25,7 @@
 # Licensee has his registered seat, an establishment or assets.
 
 import os
+import platform
 
 from setuptools import setup
 from distutils.extension import Extension
@@ -42,6 +43,12 @@ upstream_headers = [os.path.join(upstream_dir, f)
                     for f in os.listdir(upstream_dir)
                     if f.split(".")[-1] in ("hpp", "hxx", "h")]
 
+include_dirs = [upstream_dir]
+extra_compile_args = ['-std=c++11']
+if platform.system() == 'Darwin':
+    include_dirs.append('/usr/local/opt/openssl/include')
+    extra_compile_args.append('-stdlib=libc++')
+
 setup(
     name='score.uws',
     version='0.0.1',
@@ -51,7 +58,7 @@ setup(
     author_email='score@strg.at',
     url='http://score-framework.org',
     keywords='score framework websocket',
-    packages=['score', 'score.uws'],
+    packages=['score', 'score.uws', 'score.uws._hub'],
     namespace_packages=['score'],
     zip_safe=False,
     license='LGPL',
@@ -78,8 +85,9 @@ setup(
             define_macros=[
                 ("USE_LIBUV", "1"),
             ],
+            include_dirs=include_dirs,
+            extra_compile_args=extra_compile_args,
             sources=["score/uws/_hub/hub.pyx"] + upstream_src,
-            include_dirs=[upstream_dir],
             language="c++",
             libraries=['pthread', 'ssl', 'crypto', 'z', 'uv'],
         ),
