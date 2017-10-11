@@ -65,8 +65,8 @@ void stopCallback(uv_async_t* handle) {
     uv_loop_close(loop);
     std::unique_lock< std::mutex > lock(data->stopMutex);
     data->stopped = true;
-    lock.unlock();
     data->stopCondition.notify_one();
+    lock.unlock();
 };
 
 bool UwsHub::listen(char* host, int port) {
