@@ -132,7 +132,7 @@ ctypedef void* voidP
 cdef map[UwsWebSocketP, voidP] _connectionMap
 
 
-cdef void _on_connect_callback(void* data, UwsWebSocket *ws) with gil:
+cdef void _on_connect_callback(void* data, UwsWebSocket *ws):
     hub = (<Hub>data)
     client = Client(hub)
     client._c_ws = ws
@@ -142,7 +142,7 @@ cdef void _on_connect_callback(void* data, UwsWebSocket *ws) with gil:
 
 
 cdef void _on_disconnect_callback(void* data, UwsWebSocket *ws, int code,
-                                  char *message, size_t length) with gil:
+                                  char *message, size_t length):
     hub = (<Hub>data)
     client = <Client>(_connectionMap[ws])
     hub._on_disconnect(client, code, str(message[:length], 'ASCII'))
@@ -151,7 +151,7 @@ cdef void _on_disconnect_callback(void* data, UwsWebSocket *ws, int code,
 
 
 cdef void _on_message_callback(void* data, UwsWebSocket *ws,
-                               char *message, size_t length) with gil:
+                               char *message, size_t length):
     client = <Client>(_connectionMap[ws])
     hub = <Hub>(client.hub)
     hub._on_message(client, str(message[:length], 'UTF-8'))
