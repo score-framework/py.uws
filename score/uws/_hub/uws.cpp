@@ -1,4 +1,6 @@
+#ifndef USE_LIBUV
 #define USE_LIBUV
+#endif
 
 #include <map>
 #include "uWS/uWS.h"
