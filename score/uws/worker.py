@@ -4,6 +4,9 @@ from ._hub import Hub
 
 
 class UwsWorker(score.serve.Worker):
+    """
+    A :class:`score.serve.Worker` startung a uWebSockets server.
+    """
 
     __hub = None
 
