@@ -1,4 +1,5 @@
 from libcpp.map cimport map
+from libcpp cimport bool
 
 
 cdef extern from "<uWS/uWS.h>" namespace "uWS":
@@ -28,6 +29,7 @@ cdef extern from "uws.cpp":
         void send(char*, OpCode)
 
     cdef cppclass UwsHub:
+        UwsHub(bool use_default_loop)
         void onConnect(on_connect_cb callback, void* data)
         void onDisconnect(on_disconnect_cb callback, void* data)
         void onMessage(on_message_cb callback, void* data)
@@ -86,8 +88,8 @@ cdef class Hub:
 
     connections = []
 
-    def __cinit__(self):
-        self._c_hub = new UwsHub()
+    def __cinit__(self, *, use_default_loop=False):
+        self._c_hub = new UwsHub(use_default_loop)
         if self._c_hub is NULL:
             raise MemoryError()
         self._c_hub.onConnect(_on_connect_callback, <void*>self)

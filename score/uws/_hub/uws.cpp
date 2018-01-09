@@ -18,9 +18,15 @@ typedef std::function<void(void* data, uWS::WebSocket<uWS::SERVER>*, int, char *
 class Hub : public uWS::Hub {
 
     public:
+        Hub(bool useDefaultLoop = false);
+
         void stopListening();
 
 };
+
+Hub::Hub(bool useDefaultLoop)
+    : uWS::Hub(0, useDefaultLoop) {
+}
 
 void Hub::stopListening() {
     this->uWS::Group<uWS::SERVER>::stopListening();
@@ -36,6 +42,8 @@ typedef struct {
 class UwsHub {
 
     public:
+        UwsHub(bool useDefaultLoop = false);
+
         void onConnect(OnConnectCallbackType callback, void* data);
         void onDisconnect(OnDisconnectCallbackType callback, void* data);
         void onMessage(OnMessageCallbackType callback, void* data);
@@ -70,6 +78,10 @@ void stopCallback(uv_async_t* handle) {
     data->stopCondition.notify_one();
     lock.unlock();
 };
+
+UwsHub::UwsHub(bool useDefaultLoop)
+       : hub(useDefaultLoop) {
+}
 
 bool UwsHub::listen(char* host, int port) {
     return this->hub.listen(host, port);
