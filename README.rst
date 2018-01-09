@@ -1,3 +1,6 @@
+.. image:: https://raw.githubusercontent.com/score-framework/py.doc/master/docs/score-banner.png
+    :target: http://score-framework.org
+
 `The SCORE Framework`_ is a collection of harmonized python and javascript
 libraries for the development of large scale web projects. Powered by strg.at_.
 
@@ -10,7 +13,10 @@ score.ws
 
 uWebsocket implementation for use in combination with score.serve.
 
-This module is a work in progress, thus currently poorly documented :-/
+The `narrative documentation of score.uws`__ contains all the information you
+need to put this module to good use.
+
+__ http://www.score-framework.org/doc/python/uws/
 
 
 License
