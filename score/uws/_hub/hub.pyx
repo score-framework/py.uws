@@ -88,6 +88,7 @@ cdef class Hub:
 
     connections = []
 
+
     def __cinit__(self, *, use_default_loop=False):
         self._c_hub = new UwsHub(use_default_loop)
         if self._c_hub is NULL:
@@ -134,7 +135,7 @@ cdef class Hub:
 
     cpdef void add_connect_callback(self, callback):
         """
-        Register a :term:`callable` that will be invoked whenever a new
+        Register a :func:`callable` that will be invoked whenever a new
         connection is received. The callback will just receive a single
         argument: the connected :class:`Client`.
         """
@@ -142,7 +143,7 @@ cdef class Hub:
 
     cpdef void add_message_callback(self, callback):
         """
-        Register a :term:`callable` that will be invoked whenever a message is
+        Register a :func:`callable` that will be invoked whenever a message is
         received from a connected client. The callback will receive two
         arguments: the :class:`Client` and the message string.
         """
@@ -150,7 +151,7 @@ cdef class Hub:
 
     cpdef void add_disconnect_callback(self, callback):
         """
-        Register a :term:`callable` that will be invoked whenever a client is
+        Register a :func:`callable` that will be invoked whenever a client is
         disconnected. The callback will receive three arguments: the
         :class:`Client`, the numeric code and the message string.
         """
