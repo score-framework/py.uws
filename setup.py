@@ -1,4 +1,4 @@
-# Copyright © 2017 STRG.AT GmbH, Vienna, Austria
+# Copyright © 2017,2018 STRG.AT GmbH, Vienna, Austria
 #
 # This file is part of the The SCORE Framework.
 #
@@ -51,7 +51,7 @@ if platform.system() == 'Darwin':
 
 setup(
     name='score.uws',
-    version='0.0.1',
+    version='0.0.2',
     description='HTTP handler of The SCORE Framework',
     long_description=README,
     author='strg.at',
