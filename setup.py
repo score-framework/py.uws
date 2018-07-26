@@ -51,7 +51,7 @@ if platform.system() == 'Darwin':
 
 setup(
     name='score.uws',
-    version='0.0.2',
+    version='0.0.3',
     description='HTTP handler of The SCORE Framework',
     long_description=README,
     author='strg.at',
