@@ -28,6 +28,6 @@ from ._init import init, ConfiguredUwsModule
 from .worker import UwsWorker
 from ._hub import Client, Hub
 
-__version__ = '0.0.3'
+__version__ = '0.0.4'
 
 __all__ = ('init', 'ConfiguredUwsModule', 'UwsWorker', 'Client', 'Hub')
